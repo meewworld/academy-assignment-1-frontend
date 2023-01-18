@@ -26,7 +26,6 @@ const variants: Record<Provider, Variant> = {
   },
 };
 
-
 type SocialLoginButtonProps = {
   disabled?: boolean;
   className?: string;
@@ -40,5 +39,3 @@ const SocialLoginButton: React.FC<SocialLoginButtonProps> = ({ onClick, provider
   </IonButton>
 );
 export default SocialLoginButton;
-
-
