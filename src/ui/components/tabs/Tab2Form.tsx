@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { Carousel, Button, Space } from 'antd';
 import React from 'react';
 import { IonContent, IonFab, IonFabButton, IonFabList, IonIcon, IonHeader, IonTitle } from '@ionic/react';
-import { add, colorFill, colorFillSharp } from 'ionicons/icons';
+import { add, addCircle, colorFill, colorFillSharp } from 'ionicons/icons';
 import './Tab2Form.css';
 
 const Tab2Form: React.FC = () => {
@@ -43,7 +43,7 @@ const Tab2Form: React.FC = () => {
 
       <IonFab vertical="center" horizontal="center" slot="fixed" className="colorFabBtn">
         <IonFabButton color="dark" onClick={revertClick}>
-          <IonIcon icon={add}></IonIcon>
+          <IonIcon icon={addCircle}></IonIcon>
         </IonFabButton>
 
         <IonFabList side="top">
