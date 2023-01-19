@@ -1,56 +1,9 @@
-// import React from 'react';
-// import { useState } from 'react';
-
-// import { IonContent, IonFab, IonFabButton, IonFabList, IonIcon } from '@ionic/react';
-// import { add, chevronBack, chevronDown, chevronForward, chevronUp } from 'ionicons/icons';
-
-// const Tab2Form: React.FC = () => {
-//   const [active, setActive] = useState(false);
-//   const handleClick = () => {
-//     setActive(!active);
-//     console.log('Virker');
-//   };
-//   return (
-//     <IonFab vertical="center" horizontal="center" slot="fixed">
-//       <IonFabButton color="dark">
-//         <IonIcon icon={add}></IonIcon>
-//       </IonFabButton>
-//       <IonFabList side="top">
-//         <IonFabButton color="danger" onClick={handleClick} style={{ backgroundColor: active ? 'danger' : 'danger' }}>
-//           <IonIcon icon={chevronUp}></IonIcon>
-//         </IonFabButton>
-//       </IonFabList>
-//       <IonFabList side="end">
-//         <IonFabButton color="warning">
-//           <IonIcon icon={chevronForward}></IonIcon>
-//         </IonFabButton>
-//         {/* <IonFabButton color="success">
-//             <IonIcon icon={chevronForward}></IonIcon>
-//           </IonFabButton> */}
-//       </IonFabList>
-//       <IonFabList side="bottom">
-//         <IonFabButton color="success">
-//           <IonIcon icon={chevronDown}></IonIcon>
-//         </IonFabButton>
-//       </IonFabList>
-//       <IonFabList side="start">
-//         <IonFabButton color="primary">
-//           <IonIcon icon={chevronBack}></IonIcon>
-//         </IonFabButton>
-//         {/* <IonFabButton color="warning">
-//             <IonIcon icon={chevronBack}></IonIcon>
-//           </IonFabButton> */}
-//       </IonFabList>
-//     </IonFab>
-//   );
-// };
-
 import { useState, useCallback } from 'react';
 import { Carousel, Button, Space } from 'antd';
 import React from 'react';
 import { IonContent, IonFab, IonFabButton, IonFabList, IonIcon, IonHeader, IonTitle } from '@ionic/react';
 import { add, colorFill, colorFillSharp } from 'ionicons/icons';
-// import "./HomePage.css";
+import './Tab2Form.css';
 
 const Tab2Form: React.FC = () => {
   const [bgColor, setBgColor] = useState('light');
@@ -71,7 +24,7 @@ const Tab2Form: React.FC = () => {
         // autoplay
         // effect="fade"
         // speed={4000}
-        className="homeCarousel"
+        className="tab2Carousel"
         // dots
       >
         <div>
