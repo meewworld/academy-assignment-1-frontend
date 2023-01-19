@@ -53,8 +53,8 @@
     "@ionic/pwa-elements": "^3.1.1",
     "@ionic/react": "^6.2.6",
     "@ionic/react-router": "^6.2.6",
-    "@supabase/supabase-js": "^2.0.2",
-    "antd": "^5.0.7",
+    "@supabase/supabase-js": "^2.4.0",
+    "antd": "^5.1.5",
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
     "formik": "^2.2.9",
@@ -105,7 +105,7 @@
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
-    "supabase": "^1.10.2",
+    "supabase": "^1.34.2",
     "typescript": "^4.1.3"
   }
 }
