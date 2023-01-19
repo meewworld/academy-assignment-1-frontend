@@ -48,7 +48,7 @@
 import { useState, useCallback } from 'react';
 import React from 'react';
 import { IonContent, IonFab, IonFabButton, IonFabList, IonIcon, IonHeader, IonTitle } from '@ionic/react';
-import { add, chevronBack, chevronDown, chevronForward, chevronUp, colorFill, colorFillSharp } from 'ionicons/icons';
+import { add, colorFill } from 'ionicons/icons';
 
 const Tab2Form: React.FC = () => {
   const [bgColor, setBgColor] = useState('light');
@@ -66,21 +66,11 @@ const Tab2Form: React.FC = () => {
   return (
     <IonContent color={bgColor}>
       <IonFab vertical="center" horizontal="center" slot="fixed">
-        <IonFabButton
-          color="dark"
-          // onIonChange={(e) => setBgColor(e.detail.value ?? "danger")}
-          // onClick={(e: any) => setBgColor(bgColor)}
-          onClick={revertClick}
-        >
+        <IonFabButton color="dark" onClick={revertClick}>
           <IonIcon icon={add}></IonIcon>
         </IonFabButton>
         <IonFabList side="top">
-          <IonFabButton
-            color="danger"
-            onClick={() => setBgColor('danger')}
-            // onChange={(e:any) => setBgColor("danger")}
-            // className="changeBtn" onClick={handleClick2}
-          >
+          <IonFabButton color="danger" onClick={() => setBgColor('danger')}>
             <IonIcon icon={colorFill}></IonIcon>
           </IonFabButton>
         </IonFabList>
@@ -95,7 +85,7 @@ const Tab2Form: React.FC = () => {
           </IonFabButton>
         </IonFabList>
         <IonFabList side="start">
-          <IonFabButton color="medium" onClick={() => setBgColor('medium')}>
+          <IonFabButton color="tertiary" onClick={() => setBgColor('tertiary')}>
             <IonIcon icon={colorFill}></IonIcon>
           </IonFabButton>
         </IonFabList>
