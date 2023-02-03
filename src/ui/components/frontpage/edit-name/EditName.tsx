@@ -1,7 +1,8 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   IonButtons,
   IonButton,
+  IonModal,
   IonHeader,
   IonContent,
   IonToolbar,
@@ -10,68 +11,60 @@ import {
   IonItem,
   IonLabel,
   IonInput,
-  useIonModal,
 } from '@ionic/react';
 import { OverlayEventDetail } from '@ionic/core/components';
 
-const ModalExample = ({
-  onDismiss,
-}: {
-  onDismiss: (data?: string | null | undefined | number, role?: string) => void;
-}) => {
-  const inputRef = useRef<HTMLIonInputElement>(null);
-  return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonButton color="medium" onClick={() => onDismiss(null, 'cancel')}>
-              Cancel
-            </IonButton>
-          </IonButtons>
-          <IonTitle>Welcome</IonTitle>
-          <IonButtons slot="end">
-            <IonButton onClick={() => onDismiss(inputRef.current?.value, 'confirm')}>Confirm</IonButton>
-          </IonButtons>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent className="ion-padding">
-        <IonItem>
-          <IonLabel position="stacked">Enter your name</IonLabel>
-          <IonInput ref={inputRef} placeholder="Your name" />
-        </IonItem>
-      </IonContent>
-    </IonPage>
+function Example() {
+  const modal = useRef<HTMLIonModalElement>(null);
+  const input = useRef<HTMLIonInputElement>(null);
+
+  const [message, setMessage] = useState(
+    'This modal example uses triggers to automatically open a modal when the button is clicked.'
   );
-};
 
-function Example({ color, expand, children }: { color: string; expand: string; children: React.ReactNode; }) {
-  const [present, dismiss] = useIonModal(ModalExample, {
-    onDismiss: (data: string, role: string) => dismiss(data, role),
-  });
-  const [message, setMessage] = useState('This modal example uses the modalController to present and dismiss modals.');
+  function confirm() {
+    modal.current?.dismiss(input.current?.value, 'confirm');
+  }
 
-  function openModal() {
-    present({
-      onWillDismiss: (ev: CustomEvent<OverlayEventDetail>) => {
-        if (ev.detail.role === 'confirm') {
-          setMessage(`Hello, ${ev.detail.data}!`);
-        }
-      },
-    });
+  function onWillDismiss(ev: CustomEvent<OverlayEventDetail>) {
+    if (ev.detail.role === 'confirm') {
+      setMessage(`Hello, ${ev.detail.data}!`);
+    }
   }
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
+          <IonTitle>Inline Modal</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <IonButton color={color} onClick={openModal}>
-          {children}
-       </IonButton>
+        <IonButton id="open-modal" expand="block">
+          Open
+        </IonButton>
         <p>{message}</p>
+        <IonModal ref={modal} trigger="open-modal" onWillDismiss={(ev) => onWillDismiss(ev)}>
+          <IonHeader>
+            <IonToolbar>
+              <IonButtons slot="start">
+                <IonButton onClick={() => modal.current?.dismiss()}>Cancel</IonButton>
+              </IonButtons>
+              <IonTitle>Welcome</IonTitle>
+              <IonButtons slot="end">
+                <IonButton strong={true} onClick={() => confirm()}>
+                  Confirm
+                </IonButton>
+              </IonButtons>
+            </IonToolbar>
+          </IonHeader>
+          <IonContent className="ion-padding">
+            <IonItem>
+              <IonLabel position="stacked">Enter your name</IonLabel>
+              <IonInput ref={input} type="text" placeholder="Your name" />
+            </IonItem>
+          </IonContent>
+        </IonModal>
       </IonContent>
     </IonPage>
   );
