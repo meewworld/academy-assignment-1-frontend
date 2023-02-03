@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Redirect } from 'react-router';
+import { Route, Redirect, useHistory } from 'react-router';
 import { IonReactRouter } from '@ionic/react-router';
 import { useDarkMode } from '../../store/user';
 import {
@@ -20,7 +20,7 @@ import {
   IonLabel,
   IonToggle,
 } from '@ionic/react';
-import { peopleOutline, ticketOutline, walletOutline, cameraOutline } from 'ionicons/icons';
+import { peopleOutline, home, dice, person } from 'ionicons/icons';
 import { moon } from 'ionicons/icons';
 import Tab1 from './tabs/tab-1/Tab1';
 import Tab2 from './tabs/tab-2/Tab2';
@@ -34,6 +34,7 @@ const HomePage: React.FC = () => {
   const authUser = useAuthUserStore((state) => state.authUser);
   const resetAuthUser = useAuthUserStore((state) => state.resetAuthUser);
   const { darkMode, toggleDarkMode } = useDarkMode();
+  const history = useHistory();
 
   const toggleDarkModeHandler = () => {
     document.body.classList.toggle('dark');
@@ -50,15 +51,23 @@ const HomePage: React.FC = () => {
     router.push('/login');
   };
 
+  const goBack = () => {
+    history.goBack();
+  };
+
   return (
     <IonPage id="main-content">
       <IonHeader>
         <IonToolbar>
-            <IonItem>
-              <IonIcon slot="start" icon={moon} className="component-icon component-icon-dark" />
-              <IonLabel>Dark Mode</IonLabel>
-              <IonToggle slot="end" name="darkMode" checked={darkMode} onIonChange={toggleDarkModeHandler} />
-            </IonItem>
+          <IonButtons slot="start">
+            <IonButton onClick={goBack}>Back</IonButton>
+            <IonMenuButton />
+          </IonButtons>
+          <IonItem>
+            <IonIcon slot="start" icon={moon} className="component-icon component-icon-dark" />
+            <IonLabel>Dark Mode</IonLabel>
+            <IonToggle slot="end" name="darkMode" checked={darkMode} onIonChange={toggleDarkModeHandler} />
+          </IonItem>
           <IonButton onClick={handleLogOut} slot="end">
             Log ud
           </IonButton>
@@ -100,29 +109,29 @@ export default HomePage;
 
 const pages = [
   {
-    name: 'photo',
-    icon: cameraOutline,
+    name: 'home',
+    icon: home,
     path: '/tab1',
     component: Tab1,
     redirect: true,
   },
   {
-    name: 'people',
-    icon: peopleOutline,
+    name: 'dice-games',
+    icon: dice,
     path: '/tab2',
     component: Tab2,
     redirect: false,
   },
   {
-    name: 'ticket',
-    icon: ticketOutline,
+    name: 'chatroom',
+    icon: peopleOutline,
     path: '/tab3',
     component: Tab3,
     redirect: false,
   },
   {
-    name: 'wallet',
-    icon: walletOutline,
+    name: 'profile',
+    icon: person,
     path: '/tab4',
     component: Tab4,
     redirect: false,
