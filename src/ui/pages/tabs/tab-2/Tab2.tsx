@@ -18,7 +18,7 @@ const Tab2: React.FC = () => {
   // }
 
   return(
-  <IonContent color={'white-background'}>
+  <IonContent>
     <div className="w-[600px] mx-auto flex flex-col">
       <Carousel>
         <div>

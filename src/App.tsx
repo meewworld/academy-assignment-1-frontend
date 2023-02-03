@@ -4,7 +4,7 @@ import { IonApp, IonLoading, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { supabase } from 'apis/supabaseClient';
 import { Session } from '@supabase/supabase-js';
-import { useAuthUserStore } from 'store/user';
+import { useAuthUserStore, useDarkMode } from 'store/user';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -51,10 +51,12 @@ const App: React.FC = () => {
   const [session, setSession] = useState<Session | null>();
   const [loading, setLoading] = useState<boolean>(true);
   const setAuthUser = useAuthUserStore((state) => state.setAuthUser);
+  const { darkMode } = useDarkMode();
 
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange(() => updateSession());
     void updateSession();
+    if(darkMode) document.body.classList.toggle('dark');
     return () => data.subscription.unsubscribe();
   }, []);
 

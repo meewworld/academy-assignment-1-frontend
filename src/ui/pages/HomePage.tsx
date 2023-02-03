@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, Redirect } from 'react-router';
 import { IonReactRouter } from '@ionic/react-router';
+import { useDarkMode } from '../../store/user';
 import {
   IonTabBar,
   IonTabButton,
@@ -15,9 +16,12 @@ import {
   IonToolbar,
   IonButton,
   useIonRouter,
+  IonItem,
+  IonLabel,
+  IonToggle,
 } from '@ionic/react';
 import { peopleOutline, ticketOutline, walletOutline, cameraOutline } from 'ionicons/icons';
-
+import { moon } from 'ionicons/icons';
 import Tab1 from './tabs/tab-1/Tab1';
 import Tab2 from './tabs/tab-2/Tab2';
 import Tab3 from './tabs/tab-3/Tab3';
@@ -29,6 +33,12 @@ const HomePage: React.FC = () => {
   const router = useIonRouter();
   const authUser = useAuthUserStore((state) => state.authUser);
   const resetAuthUser = useAuthUserStore((state) => state.resetAuthUser);
+  const { darkMode, toggleDarkMode } = useDarkMode();
+
+  const toggleDarkModeHandler = () => {
+    document.body.classList.toggle('dark');
+    toggleDarkMode();
+  };
 
   useEffect(() => {
     if (!authUser) router.push('/login');
@@ -44,6 +54,11 @@ const HomePage: React.FC = () => {
     <IonPage id="main-content">
       <IonHeader>
         <IonToolbar>
+            <IonItem>
+              <IonIcon slot="start" icon={moon} className="component-icon component-icon-dark" />
+              <IonLabel>Dark Mode</IonLabel>
+              <IonToggle slot="end" name="darkMode" checked={darkMode} onIonChange={toggleDarkModeHandler} />
+            </IonItem>
           <IonButton onClick={handleLogOut} slot="end">
             Log ud
           </IonButton>
@@ -65,7 +80,7 @@ const HomePage: React.FC = () => {
               </Route>
             </IonRouterOutlet>
 
-            <IonTabBar slot="bottom" color={'white-background'} class={'h-[70px] border-t-[1px] border'}>
+            <IonTabBar slot="bottom" class={'h-[70px] border-t-[1px] border'}>
               {pages.map((p, i) => {
                 return (
                   <IonTabButton key={i} tab={`tab${i}`} href={p.path}>
@@ -113,5 +128,3 @@ const pages = [
     redirect: false,
   },
 ];
-
-const menuItems = [{ name: 'Settings' }, { name: 'Account' }, { name: 'Questionnaire' }, { name: 'Logout' }];
