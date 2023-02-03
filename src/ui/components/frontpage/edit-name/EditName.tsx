@@ -1,56 +1,24 @@
 import React, { useState, useRef } from 'react';
-import {
-  IonButtons,
-  IonButton,
-  IonModal,
-  IonHeader,
-  IonContent,
-  IonToolbar,
-  IonTitle,
-  IonPage,
-  IonItem,
-  IonLabel,
-  IonInput,
-} from '@ionic/react';
+import { IonButtons, IonButton, IonModal, IonHeader, IonContent, IonToolbar, IonTitle, IonPage, IonItem, IonLabel, IonInput } from '@ionic/react';
 import { OverlayEventDetail } from '@ionic/core/components';
 
-function Example() {
+const EditNameExample = () => {
   const modal = useRef<HTMLIonModalElement>(null);
   const input = useRef<HTMLIonInputElement>(null);
 
-  const [message, setMessage] = useState(
-    'This modal example uses triggers to automatically open a modal when the button is clicked.'
-  );
-
-  function confirm() {
-    modal.current?.dismiss(input.current?.value, 'confirm');
-  }
-
-  function onWillDismiss(ev: CustomEvent<OverlayEventDetail>) {
-    if (ev.detail.role === 'confirm') {
-      setMessage(`Hello, ${ev.detail.data}!`);
-    }
-  }
+  const confirm = () => modal.current?.dismiss(input.current?.value, 'confirm');
 
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Inline Modal</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent className="ion-padding">
+      <IonContent>
         <IonButton id="open-modal" expand="block">
-          Open
+          Change Username
         </IonButton>
-        <p>{message}</p>
-        <IonModal ref={modal} trigger="open-modal" onWillDismiss={(ev) => onWillDismiss(ev)}>
+        <IonModal ref={modal} trigger="open-modal">
           <IonHeader>
             <IonToolbar>
               <IonButtons slot="start">
                 <IonButton onClick={() => modal.current?.dismiss()}>Cancel</IonButton>
               </IonButtons>
-              <IonTitle>Welcome</IonTitle>
               <IonButtons slot="end">
                 <IonButton strong={true} onClick={() => confirm()}>
                   Confirm
@@ -60,14 +28,13 @@ function Example() {
           </IonHeader>
           <IonContent className="ion-padding">
             <IonItem>
-              <IonLabel position="stacked">Enter your name</IonLabel>
+              <IonLabel position="stacked">Enter your username</IonLabel>
               <IonInput ref={input} type="text" placeholder="Your name" />
             </IonItem>
           </IonContent>
         </IonModal>
       </IonContent>
-    </IonPage>
   );
-}
+};
 
-export default Example;
+export default EditNameExample;
