@@ -1,0 +1,16 @@
+div.dark-mode-toggle {
+  width: 145px !important;
+  display: flex !important;
+  justify-content: space-evenly !important;
+  align-items: center !important;
+}
+
+ion-toggle {
+  --background-checked: #ff8c00;
+  --handle-background: no-repeat center/70% url('../../static/assets/img/sunny-outline.svg');
+  --handle-background-checked: no-repeat center/70% url('../../static/assets/img/moon-outline.svg');
+}
+
+div.dark-mode-toggle ion-item .toggle-button {
+  border-bottom: none;
+}

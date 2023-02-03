@@ -8,26 +8,23 @@ import {
   IonIcon,
   IonTabs,
   IonRouterOutlet,
-  IonButtons,
   IonContent,
   IonHeader,
-  IonMenuButton,
   IonPage,
   IonToolbar,
   IonButton,
   useIonRouter,
-  IonItem,
   IonLabel,
   IonToggle,
 } from '@ionic/react';
 import { peopleOutline, home, dice, person } from 'ionicons/icons';
-import { moon } from 'ionicons/icons';
 import Tab1 from './tabs/tab-1/Tab1';
 import Tab2 from './tabs/tab-2/Tab2';
 import Tab3 from './tabs/tab-3/Tab3';
 import Tab4 from './tabs/tab-4/Tab4';
 import { supabase } from 'apis/supabaseClient';
 import { useAuthUserStore } from 'store/user';
+import './home-page.module.css';
 
 const HomePage: React.FC = () => {
   const router = useIonRouter();
@@ -59,20 +56,16 @@ const HomePage: React.FC = () => {
     <IonPage id="main-content">
       <IonHeader>
         <IonToolbar>
-          <IonButtons slot="start">
-            <IonButton onClick={goBack}>Back</IonButton>
-            <IonMenuButton />
-          </IonButtons>
-          <div id="dark-mode-toggle">
-              <IonLabel>Dark Mode</IonLabel>
-              <IonToggle checked={darkMode} onIonChange={toggleDarkModeHandler} class="toggle-button"></IonToggle>
-            </div>
+          <IonButton onClick={goBack} slot="start">
+            Back
+          </IonButton>
+          <div className="flex items-center ml-[2%]">
+            <IonLabel className="mr-1">Dark Mode</IonLabel>
+            <IonToggle checked={darkMode} onIonChange={toggleDarkModeHandler} class="toggle-button"></IonToggle>
+          </div>
           <IonButton onClick={handleLogOut} slot="end">
             Log ud
           </IonButton>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">

@@ -45,3 +45,7 @@ p {
     @apply text-base md:text-lg;
     color: #0e0e0e;
 }
+
+body.dark p {
+    color: white;
+}
