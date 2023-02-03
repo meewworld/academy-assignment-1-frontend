@@ -16,7 +16,7 @@ import {
   IonTitle,
 } from '@ionic/react';
 import { arrowBackOutline, arrowForward, chatboxEllipsesOutline, cloudUploadOutline, ellipsisHorizontal, settingsOutline } from 'ionicons/icons';
-import Example from 'ui/components/frontpage/edit-name/EditName';
+import EditNameExample from 'ui/components/frontpage/edit-name/EditName';
 
 const Tab4: React.FC = () => {
   return (
@@ -68,9 +68,7 @@ const Tab4: React.FC = () => {
                     </IonCol>
 
                     <IonCol size="6">
-                      <Example color="secondary">
-                        <IonIcon icon={settingsOutline} size="small" />
-                      </Example>
+                      <EditNameExample/>
                     </IonCol>
                   </IonRow>
                 </IonCardContent>
