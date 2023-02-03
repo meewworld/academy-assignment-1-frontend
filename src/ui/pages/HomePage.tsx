@@ -63,11 +63,10 @@ const HomePage: React.FC = () => {
             <IonButton onClick={goBack}>Back</IonButton>
             <IonMenuButton />
           </IonButtons>
-          <IonItem>
-            <IonIcon slot="start" icon={moon} className="component-icon component-icon-dark" />
-            <IonLabel>Dark Mode</IonLabel>
-            <IonToggle slot="end" name="darkMode" checked={darkMode} onIonChange={toggleDarkModeHandler} />
-          </IonItem>
+          <div id="dark-mode-toggle">
+              <IonLabel>Dark Mode</IonLabel>
+              <IonToggle checked={darkMode} onIonChange={toggleDarkModeHandler} class="toggle-button"></IonToggle>
+            </div>
           <IonButton onClick={handleLogOut} slot="end">
             Log ud
           </IonButton>
