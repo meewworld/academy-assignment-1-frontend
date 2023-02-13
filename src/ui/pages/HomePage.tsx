@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Redirect, useHistory } from 'react-router';
 import { IonReactRouter } from '@ionic/react-router';
 import { useDarkMode } from '../../store/user';
@@ -17,11 +17,12 @@ import {
   IonLabel,
   IonToggle,
 } from '@ionic/react';
-import { peopleOutline, home, dice, person } from 'ionicons/icons';
+import { people, home, dice, person } from 'ionicons/icons';
 import Tab1 from './tabs/tab-1/Tab1';
 import Tab2 from './tabs/tab-2/Tab2';
 import Tab3 from './tabs/tab-3/Tab3';
 import Tab4 from './tabs/tab-4/Tab4';
+import GameComp from '../components/ui-library/game-component/GameComp';
 import { supabase } from 'apis/supabaseClient';
 import { useAuthUserStore } from 'store/user';
 import './home-page.module.css';
@@ -48,22 +49,18 @@ const HomePage: React.FC = () => {
     router.push('/login');
   };
 
-  const goBack = () => {
-    history.goBack();
-  };
-
   return (
     <IonPage id="main-content">
       <IonHeader>
         <IonToolbar>
-          <IonButton onClick={goBack} slot="start">
+          <IonButton onClick={() => history.goBack()} slot="start" className="w-[4rem] py-1">
             Back
           </IonButton>
-          <div className="flex items-center ml-[87%]">
+          <div className="flex items-center justify-end pr-2">
             <IonToggle checked={darkMode} onIonChange={toggleDarkModeHandler} class="toggle-button"></IonToggle>
             <IonLabel className="ml-2">{darkMode ? 'Dark' : 'Light'} Mode</IonLabel>
           </div>
-          <IonButton onClick={handleLogOut} slot="end">
+          <IonButton onClick={handleLogOut} slot="end" className="w-[4rem] py-1">
             Log ud
           </IonButton>
         </IonToolbar>
@@ -72,17 +69,14 @@ const HomePage: React.FC = () => {
         <IonReactRouter>
           <IonTabs>
             <IonRouterOutlet>
+              <Redirect exact path='/home' to='/tab1'/>
               {pages.map((p, i) => {
                 return <Route key={i} exact path={p.path} component={p.component} />;
               })}
-
-              <Route exact path="/home">
-                <Redirect to={pages.filter((p) => p.redirect)[0].path} />
-              </Route>
             </IonRouterOutlet>
 
             <IonTabBar slot="bottom" class={'h-[70px] border-t-[1px] border'}>
-              {pages.map((p, i) => {
+              {tabs.map((p, i) => {
                 return (
                   <IonTabButton key={i} tab={`tab${i}`} href={p.path}>
                     <IonIcon icon={p.icon} />
@@ -99,7 +93,7 @@ const HomePage: React.FC = () => {
 
 export default HomePage;
 
-const pages = [
+const tabs = [
   {
     name: 'home',
     icon: home,
@@ -116,7 +110,7 @@ const pages = [
   },
   {
     name: 'chatroom',
-    icon: peopleOutline,
+    icon: people,
     path: '/tab3',
     component: Tab3,
     redirect: false,
@@ -128,4 +122,15 @@ const pages = [
     component: Tab4,
     redirect: false,
   },
+
+];
+
+const pages = [
+  ...tabs,
+  {
+    path: '/game/:name',
+    component: GameComp,
+    redirect: false,
+  },
+
 ];
