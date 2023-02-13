@@ -1,26 +1,12 @@
 import React, { useState, useRef } from 'react';
-import {
-  IonButtons,
-  IonButton,
-  IonModal,
-  IonHeader,
-  IonContent,
-  IonToolbar,
-  IonTitle,
-  IonPage,
-  IonItem,
-  IonLabel,
-  IonInput,
-} from '@ionic/react';
+import { IonButtons, IonButton, IonModal, IonHeader, IonContent, IonToolbar, IonTitle, IonPage, IonItem, IonLabel, IonInput } from '@ionic/react';
 import { OverlayEventDetail } from '@ionic/core/components';
 
-function Example() {
+const Example: React.FC = () => {
   const modal = useRef<HTMLIonModalElement>(null);
   const input = useRef<HTMLIonInputElement>(null);
 
-  const [message, setMessage] = useState(
-    'This modal example uses triggers to automatically open a modal when the button is clicked.'
-  );
+  const [message, setMessage] = useState('This modal example uses triggers to automatically open a modal when the button is clicked.');
 
   function confirm() {
     modal.current?.dismiss(input.current?.value, 'confirm');
@@ -33,7 +19,7 @@ function Example() {
   }
 
   return (
-    <IonPage>
+    <IonContent>
       <IonHeader>
         <IonToolbar>
           <IonTitle>Inline Modal</IonTitle>
@@ -66,8 +52,8 @@ function Example() {
           </IonContent>
         </IonModal>
       </IonContent>
-    </IonPage>
+    </IonContent>
   );
-}
+};
 
 export default Example;

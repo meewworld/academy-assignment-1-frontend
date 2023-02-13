@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { IonApp, IonLoading, setupIonicReact } from '@ionic/react';
+import { IonApp, IonLoading, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { supabase } from 'apis/supabaseClient';
 import { Session } from '@supabase/supabase-js';
@@ -71,19 +71,15 @@ const App: React.FC = () => {
     <IonApp className="bg-white">
       <AntdThemeWrapper>
         <IonReactRouter>
-          <Switch>
-            <Route exact path="/home" component={HomePage} />
-            <Route exact path="/welcome" component={LandingPage} />
+          <IonRouterOutlet>
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/forgotpassword" component={ForgotPasswordPage} />
             <Route exact path="/resetpassword" component={ResetPasswordPage} />
             <Route exact path="/register" component={RegisterPage} />
             <Route exact path="/intro" component={IntroPage} />
-            <Route path="/ui-library" component={UILibRouter} />
-            <Route path="/*">
-              <Redirect to={session ? '/home' : '/welcome'} />
+            <Route path="/" component={session ? HomePage : LandingPage}>
             </Route>
-          </Switch>
+          </IonRouterOutlet>
         </IonReactRouter>
       </AntdThemeWrapper>
     </IonApp>
