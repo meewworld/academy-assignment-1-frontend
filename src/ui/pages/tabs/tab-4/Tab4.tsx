@@ -13,9 +13,8 @@ import {
   IonIcon,
   IonRow,
   IonText,
-  IonTitle,
 } from '@ionic/react';
-import { arrowBackOutline, arrowForward, chatboxEllipsesOutline, cloudUploadOutline, ellipsisHorizontal, settingsOutline } from 'ionicons/icons';
+import { arrowBackOutline, arrowForward, chatboxEllipsesOutline, cloudUploadOutline, ellipsisHorizontal } from 'ionicons/icons';
 import EditNameExample from 'ui/components/frontpage/edit-name/EditName';
 
 const Tab4: React.FC = () => {
@@ -41,13 +40,13 @@ const Tab4: React.FC = () => {
               <IonCard className="profileHeader">
                 <IonCardContent>
                   <IonRow>
-                    <IonCol size="4">
+                    <IonCol size="6">
                       <img src="./static/assets/img/meew-bg.jpg" alt="avatar" className="avatar" />
                     </IonCol>
 
-                    <IonCol size="8">
-                      <IonRow className="profileInfo">
-                        <IonCol size="12">
+                    <IonCol size="6">
+                      <IonRow className="profileInfo justify-center">
+                        <IonCol size="6">
                           <IonText color="dark" className="profileName">
                             <p>Patrick Lindahl</p>
                           </IonText>
@@ -68,7 +67,7 @@ const Tab4: React.FC = () => {
                     </IonCol>
 
                     <IonCol size="6">
-                      <EditNameExample/>
+                      <EditNameExample />
                     </IonCol>
                   </IonRow>
                 </IonCardContent>

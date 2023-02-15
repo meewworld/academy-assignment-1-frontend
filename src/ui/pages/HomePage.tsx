@@ -48,7 +48,6 @@ const HomePage: React.FC = () => {
     await supabase.auth.signOut();
     router.push('/login');
   };
-
   return (
     <IonPage id="main-content">
       <IonHeader>
@@ -69,7 +68,8 @@ const HomePage: React.FC = () => {
         <IonReactRouter>
           <IonTabs>
             <IonRouterOutlet>
-              <Redirect exact path='/home' to='/tab1'/>
+              <Redirect exact path={'/home'} to="/tab1" />
+              <Redirect exact path={'/'} to="/tab1" />
               {pages.map((p, i) => {
                 return <Route key={i} exact path={p.path} component={p.component} />;
               })}
@@ -122,7 +122,6 @@ const tabs = [
     component: Tab4,
     redirect: false,
   },
-
 ];
 
 const pages = [
@@ -132,5 +131,4 @@ const pages = [
     component: GameComp,
     redirect: false,
   },
-
 ];
