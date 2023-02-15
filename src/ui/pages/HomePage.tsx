@@ -59,7 +59,6 @@ const HomePage: React.FC = () => {
           <div className="flex items-center justify-end pr-2">
             <IonToggle checked={darkMode} onIonChange={toggleDarkModeHandler} class="toggle-button"></IonToggle>
             <IonLabel className="ml-2">{darkMode ? 'Dark' : 'Light'} Mode</IonLabel>
-            <IonLabel className="ml-2">{darkMode ? 'Dark' : 'Light'} Mode</IonLabel>
           </div>
           <IonButton onClick={handleLogOut} slot="end" className="w-[4rem] py-1">
             Log ud
