@@ -35,7 +35,6 @@ import './ui/theme/global.css';
 import './_i18n/config';
 
 /** Pages imports */
-import IntroPage from './ui/pages/IntroPage';
 import LoginPage from './ui/pages/LoginPage';
 import RegisterPage from 'ui/pages/RegisterPage';
 import ForgotPasswordPage from 'ui/pages/ForgotPasswordPage';
@@ -74,7 +73,6 @@ const App: React.FC = () => {
             <Route exact path="/forgotpassword" component={ForgotPasswordPage} />
             <Route exact path="/resetpassword" component={ResetPasswordPage} />
             <Route exact path="/register" component={RegisterPage} />
-            <Route exact path="/intro" component={IntroPage} />
             <Route path="/" component={session ? HomePage : LoginPage}>
             </Route>
           </IonRouterOutlet>
