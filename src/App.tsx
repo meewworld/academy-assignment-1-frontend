@@ -35,8 +35,6 @@ import './ui/theme/global.css';
 import './_i18n/config';
 
 /** Pages imports */
-import LandingPage from './ui/pages/LandingPage';
-import { UILibRouter } from './ui/pages/ui-library/UILibRouter';
 import IntroPage from './ui/pages/IntroPage';
 import LoginPage from './ui/pages/LoginPage';
 import RegisterPage from 'ui/pages/RegisterPage';
@@ -77,7 +75,7 @@ const App: React.FC = () => {
             <Route exact path="/resetpassword" component={ResetPasswordPage} />
             <Route exact path="/register" component={RegisterPage} />
             <Route exact path="/intro" component={IntroPage} />
-            <Route path="/" component={session ? HomePage : LandingPage}>
+            <Route path="/" component={session ? HomePage : LoginPage}>
             </Route>
           </IonRouterOutlet>
         </IonReactRouter>
