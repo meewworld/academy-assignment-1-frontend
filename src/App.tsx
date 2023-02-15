@@ -53,7 +53,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange(() => updateSession());
     void updateSession();
-    if(darkMode) document.body.classList.toggle('dark');
+    if (darkMode) document.body.classList.toggle('dark');
     return () => data.subscription.unsubscribe();
   }, []);
 
@@ -68,14 +68,13 @@ const App: React.FC = () => {
     <IonApp className="bg-white">
       <AntdThemeWrapper>
         <IonReactRouter>
-          <IonRouterOutlet>
+          <Switch>
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/forgotpassword" component={ForgotPasswordPage} />
             <Route exact path="/resetpassword" component={ResetPasswordPage} />
             <Route exact path="/register" component={RegisterPage} />
-            <Route path="/" component={session ? HomePage : LoginPage}>
-            </Route>
-          </IonRouterOutlet>
+            <Route path="/" component={session ? HomePage : LoginPage} />
+          </Switch>
         </IonReactRouter>
       </AntdThemeWrapper>
     </IonApp>
