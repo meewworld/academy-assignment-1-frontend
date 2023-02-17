@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { IonApp, IonLoading, IonRouterOutlet, setupIonicReact } from '@ionic/react';
+import { IonApp, IonLoading, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { supabase } from 'apis/supabaseClient';
 import { Session } from '@supabase/supabase-js';
-import { useAuthUserStore, useDarkMode } from 'store/user';
+import { useAuthUserStore } from 'store/user';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -35,6 +35,9 @@ import './ui/theme/global.css';
 import './_i18n/config';
 
 /** Pages imports */
+import LandingPage from './ui/pages/LandingPage';
+import { UILibRouter } from './ui/pages/ui-library/UILibRouter';
+import IntroPage from './ui/pages/IntroPage';
 import LoginPage from './ui/pages/LoginPage';
 import RegisterPage from 'ui/pages/RegisterPage';
 import ForgotPasswordPage from 'ui/pages/ForgotPasswordPage';
@@ -48,12 +51,10 @@ const App: React.FC = () => {
   const [session, setSession] = useState<Session | null>();
   const [loading, setLoading] = useState<boolean>(true);
   const setAuthUser = useAuthUserStore((state) => state.setAuthUser);
-  const { darkMode } = useDarkMode();
 
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange(() => updateSession());
     void updateSession();
-    if (darkMode) document.body.classList.toggle('dark');
     return () => data.subscription.unsubscribe();
   }, []);
 
@@ -69,11 +70,17 @@ const App: React.FC = () => {
       <AntdThemeWrapper>
         <IonReactRouter>
           <Switch>
+            <Route exact path="/home" component={HomePage} />
+            <Route exact path="/welcome" component={LandingPage} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/forgotpassword" component={ForgotPasswordPage} />
             <Route exact path="/resetpassword" component={ResetPasswordPage} />
             <Route exact path="/register" component={RegisterPage} />
-            <Route path="/" component={session ? HomePage : LoginPage} />
+            <Route exact path="/intro" component={IntroPage} />
+            <Route path="/ui-library" component={UILibRouter} />
+            <Route path="/*">
+              <Redirect to={session ? '/home' : '/welcome'} />
+            </Route>
           </Switch>
         </IonReactRouter>
       </AntdThemeWrapper>
