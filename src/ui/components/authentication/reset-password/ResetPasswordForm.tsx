@@ -97,7 +97,7 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = ({ togglePasswordButtonT
           <IonText className="text-primary-brand text-xl font-extrabold">{t('authentication.resetPassword')}</IonText>
         </div>
 
-        <IonItem lines="none" className={`border ${passwordValid ? 'border-grey-text' : 'border-red-300'} mt-8`}>
+        <IonItem lines="none" color={'white-background'} className={`border ${passwordValid ? 'border-grey-text' : 'border-red-300'} mt-8`}>
           <IonInput
             value={password}
             placeholder={t('authentication.password')}
@@ -114,7 +114,7 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = ({ togglePasswordButtonT
 
         <IonText className={`text-red-500 ${passwordValid && 'opacity-0'}`}>{t('authentication.passwordMinLength')}</IonText>
 
-        <IonItem lines="none" className={`border ${repPasswordValid ? 'border-grey-text' : 'border-red-300'}`}>
+        <IonItem lines="none" color={'white-background'} className={`border ${repPasswordValid ? 'border-grey-text' : 'border-red-300'}`}>
           <IonInput
             value={repeatedPassword}
             placeholder={t('authentication.repeatPassword')}

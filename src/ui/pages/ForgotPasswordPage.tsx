@@ -5,7 +5,7 @@ import ForgotPasswordForm from 'ui/components/authentication/forgot-password/For
 const ForgotPasswordPage: React.FC = () => {
   return (
     <IonPage>
-      <IonContent fullscreen class="h-full w-full flex justify-center items-center">
+      <IonContent fullscreen color={'white-background'} class="h-full w-full flex justify-center items-center">
         <ForgotPasswordForm />
       </IonContent>
     </IonPage>
