@@ -1,37 +1,43 @@
 import React, { useEffect } from 'react';
-import { Route, Redirect } from 'react-router';
+import { Route, Redirect, useHistory } from 'react-router';
 import { IonReactRouter } from '@ionic/react-router';
+import { useDarkMode } from '../../store/user';
 import {
   IonTabBar,
   IonTabButton,
   IonIcon,
   IonTabs,
   IonRouterOutlet,
-  IonButtons,
   IonContent,
   IonHeader,
-  IonMenu,
-  IonMenuButton,
   IonPage,
-  IonTitle,
   IonToolbar,
-  IonItem,
   IonButton,
   useIonRouter,
+  IonLabel,
+  IonToggle,
 } from '@ionic/react';
-import { peopleOutline, ticketOutline, walletOutline, cameraOutline } from 'ionicons/icons';
-
+import { people, home, dice, person } from 'ionicons/icons';
 import Tab1 from './tabs/tab-1/Tab1';
 import Tab2 from './tabs/tab-2/Tab2';
 import Tab3 from './tabs/tab-3/Tab3';
 import Tab4 from './tabs/tab-4/Tab4';
+import GameComp from '../components/ui-library/game-component/GameComp';
 import { supabase } from 'apis/supabaseClient';
 import { useAuthUserStore } from 'store/user';
+import './home-page.module.css';
 
 const HomePage: React.FC = () => {
   const router = useIonRouter();
   const authUser = useAuthUserStore((state) => state.authUser);
   const resetAuthUser = useAuthUserStore((state) => state.resetAuthUser);
+  const { darkMode, toggleDarkMode } = useDarkMode();
+  const history = useHistory();
+
+  const toggleDarkModeHandler = () => {
+    document.body.classList.toggle('dark');
+    toggleDarkMode();
+  };
 
   useEffect(() => {
     if (!authUser) router.push('/login');
@@ -42,34 +48,35 @@ const HomePage: React.FC = () => {
     await supabase.auth.signOut();
     router.push('/login');
   };
-
   return (
     <IonPage id="main-content">
       <IonHeader>
         <IonToolbar>
-          <IonButton onClick={handleLogOut} slot="end">
+          <IonButton onClick={() => history.goBack()} slot="start" className="w-[4rem] py-1">
+            Back
+          </IonButton>
+          <div className="flex items-center justify-end pr-2">
+            <IonToggle checked={darkMode} onIonChange={toggleDarkModeHandler} class="toggle-button"></IonToggle>
+            <IonLabel className="ml-2">{darkMode ? 'Dark' : 'Light'} Mode</IonLabel>
+          </div>
+          <IonButton onClick={handleLogOut} slot="end" className="w-[4rem] py-1">
             Log ud
           </IonButton>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
         <IonReactRouter>
           <IonTabs>
             <IonRouterOutlet>
+              <Redirect exact path={'/home'} to="/tab1" />
+              <Redirect exact path={'/'} to="/tab1" />
               {pages.map((p, i) => {
                 return <Route key={i} exact path={p.path} component={p.component} />;
               })}
-
-              <Route exact path="/home">
-                <Redirect to={pages.filter((p) => p.redirect)[0].path} />
-              </Route>
             </IonRouterOutlet>
 
-            <IonTabBar slot="bottom" color={'white-background'} class={'h-[70px] border-t-[1px] border'}>
-              {pages.map((p, i) => {
+            <IonTabBar slot="bottom" class={'h-[70px] border-t-[1px] border'}>
+              {tabs.map((p, i) => {
                 return (
                   <IonTabButton key={i} tab={`tab${i}`} href={p.path}>
                     <IonIcon icon={p.icon} />
@@ -86,35 +93,42 @@ const HomePage: React.FC = () => {
 
 export default HomePage;
 
-const pages = [
+const tabs = [
   {
-    name: 'photo',
-    icon: cameraOutline,
+    name: 'home',
+    icon: home,
     path: '/tab1',
     component: Tab1,
     redirect: true,
   },
   {
-    name: 'people',
-    icon: peopleOutline,
+    name: 'dice-games',
+    icon: dice,
     path: '/tab2',
     component: Tab2,
     redirect: false,
   },
   {
-    name: 'ticket',
-    icon: ticketOutline,
+    name: 'chatroom',
+    icon: people,
     path: '/tab3',
     component: Tab3,
     redirect: false,
   },
   {
-    name: 'wallet',
-    icon: walletOutline,
+    name: 'profile',
+    icon: person,
     path: '/tab4',
     component: Tab4,
     redirect: false,
   },
 ];
 
-const menuItems = [{ name: 'Settings' }, { name: 'Account' }, { name: 'Questionnaire' }, { name: 'Logout' }];
+const pages = [
+  ...tabs,
+  {
+    path: '/game/:name',
+    component: GameComp,
+    redirect: false,
+  },
+];

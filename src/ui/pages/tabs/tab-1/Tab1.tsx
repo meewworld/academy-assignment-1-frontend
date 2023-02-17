@@ -1,17 +1,24 @@
 import React from 'react';
-import { IonContent, IonTitle } from '@ionic/react';
-import TakePicture from 'ui/components/frontpage/take-picture/TakePicture';
-import { Photo } from '@capacitor/camera';
+import { IonContent } from '@ionic/react';
+import { Carousel } from 'antd';
+import GameCard from '../../../components/ui-library/game-card/GameCard';
 
 const Tab1: React.FC = () => {
-  const [picture, setPicture] = React.useState<Photo>();
-
   return (
-    <IonContent color={'white-background'}>
-      {!picture && <IonTitle>Take a photo!</IonTitle>}
-      {picture && <img src={picture?.webPath} alt="your upload" className="h-full w-auto m-auto" />}
-
-      <TakePicture onPictureTaken={(p) => setPicture(p)} />
+    <IonContent>
+      <div id="herherherher" className=" flex flex-col !rounded-lg">
+        <Carousel>
+          <div>
+            <GameCard title="tester jester" gameName={'jester'} backgroundImg="Preda.jpg" />
+          </div>
+          <div>
+            <GameCard title="tester mester" gameName={'mester'} backgroundImg="Preda.jpg" />
+          </div>{' '}
+          <div>
+            <GameCard title="tester shjester" gameName={'shjester'} backgroundImg="Preda.jpg" />
+          </div>
+        </Carousel>
+      </div>
     </IonContent>
   );
 };
