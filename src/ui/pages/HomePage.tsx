@@ -19,7 +19,7 @@ import {
   IonButton,
   useIonRouter,
 } from '@ionic/react';
-import { peopleOutline, ticketOutline, walletOutline, cameraOutline } from 'ionicons/icons';
+import { personCircleOutline, duplicateOutline, walletOutline, cameraOutline } from 'ionicons/icons';
 
 import Tab1 from './tabs/tab-1/Tab1';
 import Tab2 from './tabs/tab-2/Tab2';
@@ -95,15 +95,15 @@ const pages = [
     redirect: true,
   },
   {
-    name: 'people',
-    icon: peopleOutline,
+    name: 'profile',
+    icon: personCircleOutline,
     path: '/tab2',
     component: Tab2,
     redirect: false,
   },
   {
     name: 'ticket',
-    icon: ticketOutline,
+    icon: duplicateOutline,
     path: '/tab3',
     component: Tab3,
     redirect: false,
